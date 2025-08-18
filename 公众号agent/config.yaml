@@ -10,18 +10,18 @@ api_keys:
 
 # LLM设置
 llm_settings:
-  provider: "openai"  # 切换到 OpenAI 兼容中转
-  primary_model: "claude-3-5-sonnet-20240620"  # 中转示例模型
+  provider: "openai"  # 使用 OpenAI 兼容接口
+  primary_model: "deepseek-chat"  # 使用 deepseek-chat 模型
   temperature: 0.7
   max_tokens: 2048
-  insight_model: "claude-3-5-sonnet-20240620"
-  base_url: "https://www.chataiapi.com/v1"
+  insight_model: "deepseek-chat"
+  base_url: "https://api.deepseek.com/v1"  # deepseek API 地址
 
 # 嵌入设置
 embedding_settings:
-  provider: "openai"  # 使用中转的 OpenAI 兼容嵌入
-  model: "text-embedding-3-small"  # 中转常见支持
-  base_url: "https://www.chataiapi.com/v1"
+  provider: "sentence_transformers"  # 使用本地 sentence-transformers 模型
+  model: "all-MiniLM-L6-v2"  # 本地嵌入模型，从 huggingface 下载
+  # base_url: ""  # 本地模型无需 API 地址
 
 # 向量数据库配置
 vector_db:
