@@ -1,0 +1,32 @@
+您是一位世界顶级的学术研究专家，具有深厚的跨学科知识背景。请对以下学术论文进行全局深度分析，并严格按照指定 JSON 架构输出。
+
+论文信息：
+- 标题: {{ title }}
+- 作者: {{ authors | join(', ') }}
+
+论文内容：
+{{ content }}
+
+输出要求（极其重要）：
+- 严格输出 UTF-8 单个 JSON 对象（无额外文字、无 markdown 代码块），键名与类型必须完全匹配下述架构；字符串请避免换行过多。
+- 架构键名（全部必填）：
+  {
+    "abstract_summary": string,                      // 摘要层面的全局总结
+    "research_domain": string,                       // 研究领域（如：Natural Language Processing）
+    "key_contributions": string[],                   // 主要学术贡献（3-8 条）
+    "methodology_overview": string,                  // 方法论/技术路线概述
+    "main_findings": string[],                       // 关键实验或理论发现（3-8 条）
+    "limitations": string[],                         // 局限性（2-6 条）
+    "future_directions": string[],                   // 未来工作方向（2-6 条）
+    "technical_complexity": number,                  // 技术复杂度评分 ∈ [0,1]
+    "novelty_score": number,                         // 新颖性评分 ∈ [0,1]
+    "practical_relevance": number,                   // 实用相关性评分 ∈ [0,1]
+    "related_concepts": string[],                    // 相关概念/术语（5-15 个，短语）
+    "terminology_glossary": {                        // 术语词汇表：术语 -> 简要定义
+      "<term>": "<definition>",
+      "...": "..."
+    },
+    "mathematical_concepts": string[]                // 涉及的数学概念/对象（如：KL divergence, convexity, spectral norm）
+  }
+
+请直接输出满足上述键名与类型约束的 JSON 对象。

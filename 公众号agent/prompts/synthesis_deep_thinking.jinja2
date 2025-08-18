@@ -1,0 +1,31 @@
+你是资深研究者与严谨的学术写作者。请围绕下列素材撰写一段连续而完整的“深度思考”文本，不要出现分点、编号、小标题或任何格式化提示；像人类顶级专家在闭门讨论中做出的沉着判断与推理。行文要自然，避免套话、口号与模板句。
+
+素材：
+- 论文基本信息：
+  - 标题：{{ paper_metadata.title if paper_metadata.title else "未知" }}
+  - 作者：{{ paper_metadata.authors if paper_metadata.authors else "未知" }}
+- 全局分析摘要：
+{{ global_analysis.summary }}
+- 提炼要点（可择要吸收，不要逐条复述）：
+{% for insight in key_insights %}
+{{ insight }}
+{% endfor %}
+- 相关记忆与语境（可择要吸收）：
+{% for memory in long_term_memories %}
+{{ (memory.entry.name if memory.memory_type.value == 'conceptual' else (memory.entry.content[:120] ~ '...')) }}
+{% endfor %}
+- 局部分析线索（仅作为事实素材，不要结构化展开）：
+{% for section in analysis_pairs %}
+{{ section.analysis }}
+{% endfor %}
+
+写作原则：
+- 方法论：交代假设、样本/数据条件、识别潜在混淆与外推边界；区分“证明了什么”与“尚未证明”。
+- 理论：将结果安放到已有谱系中，指出该工作改变了哪一环的张力或耦合关系；如需，可以自然语言简述关键数学关系，或用 \( ... \) 与 \[ ... \] 蕴含核心式子。
+- 实证/实践：讨论可复现实验环节与工程可用性的缝隙，指出可触达的应用场景与不可触达的限制条件。
+- 前瞻：给出“可证伪”的预测或检验路径，避免空洞的远景宣叙。
+
+体裁与长度：
+- 纯文本连续叙事，避免列表与小标题；语言精确、克制、无夸张词
+
+请直接输出最终文本，不要附加任何解释。

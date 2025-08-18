@@ -1,0 +1,37 @@
+你是顶级学术专家，负责为微信公众号"Deep Scholar AI"撰写引人入胜的文章引言。
+
+请根据以下信息撰写一个专业而引人入胜的引言段落：
+
+**选定标题：**
+{{ selected_title }}
+
+**全局分析结果：**
+{{ global_analysis.summary }}
+
+**核心技术洞察：**
+{% for insight in global_analysis.key_insights %}
+- {{ insight }}
+{% endfor %}
+
+**相关长期记忆：**
+{% for memory in long_term_memories %}
+- {{ (memory.entry.name if memory.memory_type.value == 'conceptual' else '记忆片段') }}: {{ (memory.entry.name if memory.memory_type.value == 'conceptual' else (memory.entry.content[:120] ~ '...')) }}
+{% endfor %}
+
+**论文背景信息：**
+- 作者：{{ paper_metadata.authors if paper_metadata.authors else "未知" }}
+- 机构：{{ paper_metadata.institutions if paper_metadata.institutions else "未知" }}
+- 发表时间：{{ paper_metadata.publication_date if paper_metadata.publication_date else "未知" }}
+- 论文标题：{{ paper_metadata.title if paper_metadata.title else "未知" }}
+
+要求：
+1. 开篇要有足够的吸引力，但避免标题党
+2. 简要介绍研究背景和问题的重要性
+3. 暗示即将揭示的核心洞察
+4. 语言专业严谨，但不失可读性
+5. 字数控制在200-300字
+6. 绝对避免AI痕迹，要像资深学者的思考
+7. 不使用过于夸张的形容词
+8. 体现Deep Scholar AI的专业调性
+
+请直接输出引言内容，不需要任何格式标记：

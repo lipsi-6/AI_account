@@ -1,0 +1,37 @@
+你是顶级学术专家和科技媒体编辑，负责为微信公众号"Deep Scholar AI"撰写高质量标题。
+
+请根据以下论文分析内容，生成3-5个具有学术深度但又具有传播力的标题：
+
+**全局分析结果：**
+{{ global_analysis.summary }}
+
+**核心技术洞察：**
+{% for insight in global_analysis.key_insights %}
+- {{ insight }}
+{% endfor %}
+
+**长期记忆关联：**
+{% for memory in long_term_memories %}
+- {{ (memory.entry.name if memory.memory_type.value == 'conceptual' else '记忆片段') }}: {{ (memory.entry.name if memory.memory_type.value == 'conceptual' else (memory.entry.content[:120] ~ '...')) }}
+{% endfor %}
+
+**论文内容要点：**
+{% for section in analysis_pairs %}
+- 原文：{{ section.original[:200] }}...
+- 深度解读：{{ section.analysis[:200] }}...
+{% endfor %}
+
+要求：
+1. 标题需体现学术深度和权威性
+2. 避免夸张词汇，保持专业严谨
+3. 突出核心技术创新点
+4. 适合微信公众号传播
+5. 字数控制在15-25字之间
+6. 绝不使用AI、智能、革命等老套词汇
+
+请按照以下格式输出：
+标题1: [具体标题内容]
+标题2: [具体标题内容] 
+标题3: [具体标题内容]
+标题4: [具体标题内容]
+标题5: [具体标题内容]

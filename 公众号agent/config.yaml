@@ -1,0 +1,159 @@
+# Deep Scholar AI 配置文件
+# 请根据实际情况修改相应配置项
+
+# API密钥配置 (敏感信息，建议通过环境变量设置)
+api_keys:
+  openai: ""  # 请填入您的OpenAI API密钥 或设置环境变量 OPENAI_API_KEY
+  google_gemini: ""  # 请填入您的Google Gemini API密钥 或设置环境变量 GOOGLE_GEMINI_API_KEY
+  anthropic: ""  # 请填入您的Anthropic API密钥 或设置环境变量 ANTHROPIC_API_KEY
+  twitter_bearer_token: ""  # 请填入您的Twitter Bearer Token 或设置环境变量 TWITTER_BEARER_TOKEN
+
+# LLM设置
+llm_settings:
+  provider: "openai"  # 切换到 OpenAI 兼容中转
+  primary_model: "claude-3-5-sonnet-20240620"  # 中转示例模型
+  temperature: 0.7
+  max_tokens: 2048
+  insight_model: "claude-3-5-sonnet-20240620"
+  base_url: "https://www.chataiapi.com/v1"
+
+# 嵌入设置
+embedding_settings:
+  provider: "openai"  # 使用中转的 OpenAI 兼容嵌入
+  model: "text-embedding-3-small"  # 中转常见支持
+  base_url: "https://www.chataiapi.com/v1"
+
+# 向量数据库配置
+vector_db:
+  provider: "chromadb"  # 暂时只支持 chromadb
+  path: "./data/memory/chroma_db"
+  collection_name: "deep_scholar_papers"
+  chunk_collection_name: "deep_scholar_chunks"
+
+# 知识图谱配置
+knowledge_graph:
+  provider: "networkx"  # 暂时只支持 networkx
+  file_path: "./data/memory/knowledge_graph.graphml"
+  # 可选：是否导出 GraphML（用于互操作/可视化）；关闭可避免多重边语义弱化，仅使用 GPickle 主存
+  export_graphml: true
+
+# 路径配置
+paths:
+  drafts_folder: "./output/drafts"
+  logs_folder: "./logs"
+  watch_folder: "./input/papers_to_read"
+  temp_downloads_folder: "./data/temp_downloads"
+  prompt_templates_folder: "./prompts"
+
+# Agent偏好配置
+preferences:
+  # 初始关键词（冷启动使用）
+  initial_keywords:
+    - "Large Language Models"
+    - "Agentic AI"
+    - "Mixture of Experts"
+    - "World Models"
+    - "Diffusion Models"
+    - "Reinforcement Learning"
+    - "Neuroscience"
+    - "Brain-inspired AI"
+    - "Multimodal Learning"
+    - "In-Context Learning"
+    - "Chain of Thought"
+    - "Tool Learning"
+    - "Code Generation"
+    - "Mathematical Reasoning"
+  
+  # 种子论文（冷启动使用）
+  seed_papers:
+    - "https://arxiv.org/abs/1706.03762"  # Attention Is All You Need
+    - "https://arxiv.org/abs/2005.14165"  # GPT-3
+    - "https://arxiv.org/abs/2203.02155"  # Chain of Thought
+    - "https://arxiv.org/abs/2210.03629"  # ReAct
+    - "https://arxiv.org/abs/2303.08774"  # GPT-4
+  
+  # Twitter关注列表
+  twitter_handles_list:
+    - "karpathy"
+    - "ylecun"
+    - "demishassabis"
+    - "AndreyKurenkov"
+    - "fchollet"
+    - "JeffDean"
+    - "goodfellow_ian"
+    - "emilymbender"
+  
+  # 探索-利用平衡参数
+  exploration_epsilon: 0.1
+  
+  # 每日论文限制
+  daily_paper_limit: 5
+
+# PDF处理配置
+pdf_processing:
+  nougat_model_path: null  # Nougat模型路径，null表示使用默认
+  nougat_timeout_seconds: 300
+  pymupdf_timeout_seconds: 60
+
+# 信息源配置
+sources:
+  # ArXiv分类
+  arxiv_categories:
+    - "cs.AI"
+    - "cs.LG" 
+    - "cs.CL"
+    - "cs.CV"
+    - "cs.RO"
+    - "stat.ML"
+  
+  # 顶级会议URL
+  top_conference_urls:
+    - name: "NeurIPS 2024"
+      url: "https://neurips.cc/Conferences/2024/AcceptedPapers"
+      parser: "neurips"
+    - name: "ICML 2024"
+      url: "https://icml.cc/virtual/2024/papers.html"
+      parser: "icml"
+    - name: "ICLR 2024"
+      url: "https://iclr.cc/virtual/2024/papers.html"
+      parser: "iclr"
+  
+  # 社交媒体查询间隔（小时）
+  social_media_query_interval_hours: 6
+
+# 输出配置
+output:
+  max_article_word_count: 5000
+  min_article_word_count: 2000
+  markdown_format_version: "wechat_md"
+
+# 反馈学习配置
+feedback:
+  positive_weight_increase: 0.2
+  negative_weight_decrease: 0.05
+  explicit_feedback_impact: 0.3
+
+# 持续学习配置（里程碑C）
+learning:
+  enable: true
+  epsilon_min: 0.05
+  epsilon_max: 0.30
+  epsilon_step: 0.02
+  quality_threshold_good: 0.70
+  recent_window: 100
+
+# 性能和并发配置
+performance:
+  max_concurrent_downloads: 5
+  max_concurrent_llm_calls: 3
+  api_retry_attempts: 5
+  api_retry_delay_seconds: 2
+
+# 日志配置
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_path: "./logs/deep_scholar.log"
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
+  enable_structured_logging: true
