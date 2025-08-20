@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-08-19T08:24:40.517508+00:00",
+  "model": "deepseek-chat",
+  "temperature": 0.2,
+  "max_tokens": 48,
+  "system_prompt": null,
+  "use_insight_model": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": "你是一位学术编辑。请基于如下论文上下文与片段内容，生成一个高度概括的中文主题短语（8-16字），不含标点，不要解释：\n论文标题: 测试论文\n研究领域: Artificial Intelligence\n关键贡献: Proposal of HRM, a hierarchical recurrent model for deep reasoning tasks, Demonstration of HRM's ability to solve complex tasks with minimal training data (1000 examples), Elimination of dependency on pre-training or CoT techniques\n片段:\n2 Stability of Q-learning in ACT The deep Q-learning that underpins our ACT mechanism is known to be prone to instability, often requiring stabilization techniques such as replay buffers and target networks [48], which are absent in our design. Our approach, however, achieves stability through the intrinsic properties of our model and training procedure. [49] shows that Q-learning can achieve convergence if network parameters are bounded, weight decay is incorporated during training, and post-normalization layers are implemented."
+    }
+  ],
+  "additional_params": {}
+}

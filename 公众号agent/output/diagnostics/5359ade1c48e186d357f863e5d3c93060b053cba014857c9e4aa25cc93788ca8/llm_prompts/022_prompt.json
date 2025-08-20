@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-08-19T08:25:31.214007+00:00",
+  "model": "deepseek-chat",
+  "temperature": 0.2,
+  "max_tokens": 48,
+  "system_prompt": null,
+  "use_insight_model": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": "你是一位学术编辑。请基于如下论文上下文与片段内容，生成一个高度概括的中文主题短语（8-16字），不含标点，不要解释：\n论文标题: 测试论文\n研究领域: Artificial Intelligence\n关键贡献: Proposal of HRM, a hierarchical recurrent model for deep reasoning tasks, Demonstration of HRM's ability to solve complex tasks with minimal training data (1000 examples), Elimination of dependency on pre-training or CoT techniques\n片段:\nMore specifically, at each timestep \\(i\\) and given the low-level and high-level state pair (\\(z^{i}_{L}\\) and \\(z^{i}_{H}\\)) we perform a preliminary forward pass through the H-module to obtain \\(\\bar{z}^{i}=f_{H}(z^{i}_{H},z^{i}_{L}; \\theta_{H})\\) and its corresponding decoded prediction \\(\\bar{y}^{i}=f_{O}(\\bar{z}^{i}; \\theta_{O})\\). The prediction \\(\\bar{y}^{i}\\) is then visualized in Figure 7."
+    }
+  ],
+  "additional_params": {}
+}

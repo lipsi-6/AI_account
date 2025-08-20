@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-08-19T08:24:57.074486+00:00",
+  "model": "deepseek-chat",
+  "temperature": 0.2,
+  "max_tokens": 48,
+  "system_prompt": null,
+  "use_insight_model": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": "你是一位学术编辑。请基于如下论文上下文与片段内容，生成一个高度概括的中文主题短语（8-16字），不含标点，不要解释：\n论文标题: 测试论文\n研究领域: Artificial Intelligence\n关键贡献: Proposal of HRM, a hierarchical recurrent model for deep reasoning tasks, Demonstration of HRM's ability to solve complex tasks with minimal training data (1000 examples), Elimination of dependency on pre-training or CoT techniques\n片段:\nBoth input and output are represented as token sequences: \\(x=(x_{1},\\ldots,x_{l})\\) and \\(y=(y_{1},\\ldots,y_{l^{\\prime}})\\) respectively. The model includes an embedding layer \\(f_{I}\\) that converts discrete tokens into vector representations, and an output head \\(f_{O}(z; \\theta_{O})=\\text{softmax}(\\theta_{O}z)\\) that transforms hidden states into token probability distributions \\(\\hat{y}\\). The sequence-to-sequence loss is averaged over all tokens, \\(\\textsc{Loss}(\\hat{y},y)=\\frac{1}{l^{\\prime}}\\sum_{i=1}^{l^{\\prime}}\\log p(y_{ i})\\), where \\(p(y_{i})\\) is the probability that distribution \\(\\hat{y}_{i}\\) assigns to token \\(y_{i}\\). The initial hidden states \\(z^{0}\\) are initialized by sampling from a truncated normal distribution with standard deviation of 1, truncation of 2, and kept fixed throughout training."
+    }
+  ],
+  "additional_params": {}
+}

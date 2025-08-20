@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-08-19T08:24:53.243247+00:00",
+  "model": "deepseek-chat",
+  "temperature": 0.2,
+  "max_tokens": 48,
+  "system_prompt": null,
+  "use_insight_model": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": "你是一位学术编辑。请基于如下论文上下文与片段内容，生成一个高度概括的中文主题短语（8-16字），不含标点，不要解释：\n论文标题: 测试论文\n研究领域: Artificial Intelligence\n关键贡献: Proposal of HRM, a hierarchical recurrent model for deep reasoning tasks, Demonstration of HRM's ability to solve complex tasks with minimal training data (1000 examples), Elimination of dependency on pre-training or CoT techniques\n片段:\n3 Architectural details We employ a sequence-to-sequence architecture for HRM. For small-sample experiments, we replace softmax with stablemax [51] to improve generalization performance. Both the low-level and high-level recurrent modules \\(f_{L}\\) and \\(f_{H}\\) are implemented using encoder-only Transformer [52] blocks with identical architectures and dimensions. These modules take multiple inputs, and we use straightforward element-wise addition to combine them, though more sophisticated merging techniques such as gating mechanisms could potentially improve performance and is left for future work. For all Transformer blocks in this work--including those in the baseline models--we incorporate the enhancements found in modern LLMs (based on Llama [53] architectures). These improvements include Rotary Positional Encoding [54], Gated Linear Units [55], RMSNorm [56], and the removal of bias terms from linear layers. Furthermore, both HRM and recurrent Transformer models implement a Post-Norm architecture Figure 5: **Effectiveness of Adaptive Computation Time (ACT)** on the _Sudoku-Extreme-Full_. with weights initialized via truncated LeCun Normal initialization [57, 58, 59], while the"
+    }
+  ],
+  "additional_params": {}
+}

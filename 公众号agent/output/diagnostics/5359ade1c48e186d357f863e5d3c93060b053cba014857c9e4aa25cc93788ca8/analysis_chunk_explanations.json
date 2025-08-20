@@ -1,0 +1,508 @@
+[
+  {
+    "chunk_id": "ff91b35d-c4d6-4bdc-bdaf-4f4999937e99",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：###### Abstract Reasoning, the process of devising and executing complex goal-oriented action sequences, remains a critical challenge in AI. Inspired by the hierarchical and multi-timescale processing..."
+  },
+  {
+    "chunk_id": "0cccd82e-7bf8-4290-a5ac-f4f2f9e5cfce",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Current large language models (LLMs) primarily employ Chain-of-Thought (CoT) techniques, which suffer from brittle task decomposition, extensive data requirements, and high latency...."
+  },
+  {
+    "chunk_id": "b69476b4-4f2c-4341-8692-24935949c1fa",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Introduction Deep learning, as its name suggests, emerged from the idea of stacking more layers to achieve increased representation power and improved performance [1, 2]. However, despite the remarkab..."
+  },
+  {
+    "chunk_id": "aa771aee-dec5-4d10-8327-909dad9d32ac",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Footnote 1: Simply increasing the model width does not improve performance here...."
+  },
+  {
+    "chunk_id": "9f195d83-1c0d-4ffc-a3a7-89d2ef000200",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：A more efficient approach is needed to minimize these data requirements [14]. 3%**, which substantially surpasses leading CoT-based models like o3-mini-high (34. 5%) and Claude 3. 7 8K context (21. 2%..."
+  },
+  {
+    "chunk_id": "7ddcfab5-c21d-41e3-a247-7f0ca90be17d",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：## 2 Hierarchical Reasoning Model We present the HRM, inspired by three fundamental principles of neural computation observed in the brain: * [leftmargin=*] * **Hierarchical processing:** The brain pr..."
+  },
+  {
+    "chunk_id": "de8907e3-08d3-4546-b20a-b7854108f3f1",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：, slow theta waves, 4-8 Hz and fast gamma waves, 30-100 Hz) [30, 31]. Based Figure 3: Comparison of forward residuals and PCA trajectories...."
+  },
+  {
+    "chunk_id": "f3eb2f5f-b9b6-499b-aad9-c39e21bf9e55",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：A halting mechanism (detailed later in this section) determines whether the model should terminate, in which case \\(\\hat{y}\\) will be used as the final prediction, or continue with an additional forwa..."
+  },
+  {
+    "chunk_id": "675bde6b-6e3b-4790-90f7-8a1a263777ef",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：2 Stability of Q-learning in ACT The deep Q-learning that underpins our ACT mechanism is known to be prone to instability, often requiring stabilization techniques such as replay buffers and target ne..."
+  },
+  {
+    "chunk_id": "039c6d5b-1acf-4d64-98cf-2c5fe6425840",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Recent theoretical work by Gallici et al...."
+  },
+  {
+    "chunk_id": "28d7d9e1-b474-4d08-9118-59ed73e46356",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Our model satisfies these conditions through its Post-Norm architecture that employs RMSNorm (a layer normalization variant) and the AdamW optimizer. AdamW has been shown to solve an \\(L_{\\infty}\\)-co..."
+  },
+  {
+    "chunk_id": "6bde1915-1042-4030-9bf5-45d569a838db",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：3 Architectural details We employ a sequence-to-sequence architecture for HRM. For small-sample experiments, we replace softmax with stablemax [51] to improve generalization performance. Both the low-..."
+  },
+  {
+    "chunk_id": "cd690d0e-158c-4835-82ca-37d4ff80c7aa",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Both input and output are represented as token sequences: \\(x=(x_{1},\\ldots,x_{l})\\) and \\(y=(y_{1},\\ldots,y_{l^{\\prime}})\\) respectively. The model includes an embedding layer \\(f_{I}\\) that converts..."
+  },
+  {
+    "chunk_id": "a9ccdafd-d177-4f7a-a13e-47edcacd5b22",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：**(a)** Mean compute steps used by models with ACT versus models with a fixed number of compute steps (\\(M\\)). ACT maintains a low and stable number of average compute steps even as the maximum limit ..."
+  },
+  {
+    "chunk_id": "c2ba62a8-eba6-49b2-a616-6a8b29d18b04",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：## 3 Results\n\nThis section begins by describing the ARC-AGI, Sudoku, and Maze benchmarks, followed by an overview of the baseline models and their results. Figure 6-(a,b,c) presents a visual represent..."
+  },
+  {
+    "chunk_id": "ffe111f3-cdab-4507-b2ca-05a8bf7b0986",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：### Benchmarks..."
+  },
+  {
+    "chunk_id": "f55797c7-c61f-42ee-ad4e-3691d75e3270",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：1 ARC-AGI Challenge The ARC-AGI benchmark evaluates general fluid intelligence through IQ-test-like puzzles that require inductive reasoning [27]. The initial version, ARC-AGI-1, presents challenges a..."
+  },
+  {
+    "chunk_id": "73e42676-9c39-48a4-b21f-2c4a318dee0b",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Lehnert et al...."
+  },
+  {
+    "chunk_id": "48b14cea-d15c-4ff3-b08a-53166adce1ce",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：### Visualization of intermediate timesteps Although HRM demonstrates strong performance on complex reasoning tasks, it raises an intriguing question: what underlying reasoning algorithms does the HRM..."
+  },
+  {
+    "chunk_id": "1401c9b2-7b92-4119-8c0a-4c69a59d5000",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：While a definitive answer lies beyond our current scope, we begin our investigation by analyzing state trajectories and their corresponding solution evolution. In Sudoku, the strategy resembles a dept..."
+  },
+  {
+    "chunk_id": "32fc3ceb-22ed-48b3-98a6-049f547b32fa",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：More specifically, at each timestep \\(i\\) and given the low-level and high-level state pair (\\(z^{i}_{L}\\) and \\(z^{i}_{H}\\)) we perform a preliminary forward pass through the H-module to obtain \\(\\ba..."
+  },
+  {
+    "chunk_id": "68607623-04e0-4108-ae50-56612c18a4e4",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：## 4 Brain Correspondence A key principle from systems neuroscience is that a brain region's functional repertoire--its ability to handle diverse and complex tasks--is closely linked to the dimensiona..."
+  },
+  {
+    "chunk_id": "83aa4cc0-2262-4d64-96fe-bc7e3bc816c8",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：grey shading indicates changes from the previous timestep...."
+  },
+  {
+    "chunk_id": "1c74796f-e8ba-4441-80a0-65ced77fab86",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：**Bottom:** ARC-AGI-2 Task—left: provided example input-output pair; right: intermediate steps solving the test input...."
+  },
+  {
+    "chunk_id": "d41ee866-3b24-4d2b-bc7a-5928bba63ede",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：The results show a striking parallel to the biological findings...."
+  },
+  {
+    "chunk_id": "96377695-9c21-4e76-b838-9cec8a747731",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：## 5 Related Work..."
+  },
+  {
+    "chunk_id": "4b9e2c45-2848-4436-991d-207ea3992622",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：1 Reasoning and algorithm learning Given the central role of reasoning problems and their close relation to algorithms, researchers have long explored neural architectures that enable algorithm learni..."
+  },
+  {
+    "chunk_id": "f2fe3c1e-300d-4a9f-b92c-155c69dcb356",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Geiping et al. Shen et al...."
+  },
+  {
+    "chunk_id": "4052288e-1c31-4bb9-bb2f-cfacea8e7afd",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：We also mention adaptive halting mechanisms designed to allocate additional computational resources to more challenging problems. This includes the Adaptive Computation Time (ACT) for RNNs[88] and fol..."
+  },
+  {
+    "chunk_id": "2f111008-ba2c-4128-87c1-bc6dda5490ff",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：2 Brain-inspired reasoning architectures Developing a model with the reasoning power of the brain has long been a goal in brain-inspired computing. This design enables an architecture to perform a ran..."
+  },
+  {
+    "chunk_id": "cab69162-8f81-4adf-9682-e794dfda148d",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Spaun[90] is one notable example, which uses spiking neural networks to create distinct modules corresponding to brain regions like the visual cortex and prefrontal cortex. Another significant model i..."
+  },
+  {
+    "chunk_id": "110b2326-95b2-4642-81e3-db0749f84f77",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：This allows TEM to generalize and explains the emergence of various cell types like grid, border, and place cells...."
+  },
+  {
+    "chunk_id": "bd7a7ad0-58be-4e41-a57d-ffd0880525c2",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：## 6 Discussions **Turing-completeness of HRM**: Like earlier neural reasoning algorithms including the Universal Transformer [95], HRM is computationally universal when given sufficient memory and ti..."
+  },
+  {
+    "chunk_id": "b86c9503-e0ac-41d2-9bbd-0e994bfa2153",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：In other words, it falls into the category of models that can simulate any Turing machine, overcoming the computational limitations of standard Transformers discussed previously in the introduction. T..."
+  },
+  {
+    "chunk_id": "0a8e2ff4-9f2a-4676-a79c-5377cfe21e1f",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：## 7 Conclusion This work introduces the Hierarchical Reasoning Model, a brain-inspired architecture that leverages hierarchical structure and multi-timescale processing to achieve substantial computa..."
+  },
+  {
+    "chunk_id": "113ce265-1a2a-434f-8604-3956a4fd6c61",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：**Acknowledgements** We thank Mingli Yuan, Ahmed Murtadha Hasan Mahyoub and Hengshuai Yao for their insightful discussions and valuable feedback throughout the course of this work...."
+  },
+  {
+    "chunk_id": "ea463158-fb6d-482a-b850-ba8da6131367",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：## References * [1] Ian Goodfellow, Yoshua Bengio, and Aaron Courville. * [2] Kaiming He, X. Zhang, Shaoqing Ren, and Jian Sun. * [3] Lena Strobl. * [4] Tom Bylander. * [5] William Merrill and Ashish ..."
+  },
+  {
+    "chunk_id": "f8b3e367-b791-4829-9a86-9db097e64ec9",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：_Deep Learning_. deeplearningbook. Deep residual learning for image recognition. _2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)_, pages 770-778, 2015. Complexity results for p..."
+  },
+  {
+    "chunk_id": "0c604b60-dceb-4491-8fe6-a7eb4e715374",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：MIT Press, 2016. http://www. Morgan Kaufmann Publishers Inc. ISBN 1558601600. _ArXiv_, abs/2406. 09308, 2024. 1162/tacl_a_00562. arXiv preprint arXiv:2201. In _ICLR_, 2024. _ArXiv_, abs/2402. 08939, 2..."
+  },
+  {
+    "chunk_id": "0c1140cb-1922-499e-96c5-5892b3b61fc9",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Average-hard attention transformers are constant-depth uniform threshold circuits, 2023. A logic for expressing log-precision transformers. Transformers in DLOGTIME-uniform TC\\({}^{0}\\). Transformers ..."
+  },
+  {
+    "chunk_id": "70d70737-2236-42af-8247-3cf72158fe5b",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Will we run out of data?..."
+  },
+  {
+    "chunk_id": "a6393335-267b-43bb-8493-a0c60065fe54",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Zico Kolter. Zico Kolter. Mozer, and M...."
+  },
+  {
+    "chunk_id": "be5692bf-b3d5-44ee-9cc5-8d2a97c72583",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：* [58] JAX Developers. dev/en/latest/_autosummary/jax...."
+  },
+  {
+    "chunk_id": "b1b46c1c-797f-4f66-b3b0-dd75c0a5f932",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：initializers. initializers. sourceforge. Perreault...."
+  },
+  {
+    "chunk_id": "abd2956e-1070-49aa-a90d-6b49f4ff628d",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：lecun_normal_. lecun_normal...."
+  },
+  {
+    "chunk_id": "dcb15066-5983-4756-804d-48e73222bf0b",
+    "confidence": 0.3,
+    "key_insights": [
+      "需要进一步分析"
+    ],
+    "terminology": {},
+    "math": {},
+    "llm_model": "fallback",
+    "explanation": "对意群内容的基本描述：Can convolutional neural networks crack sudoku puzzles? com/Kyubyong/sudoku, 2018. Tdoku: A fast sudoku solver and generator. io/tdoku/, 2025. Sudoku-bench: Evaluating creative reasoning with sudoku v..."
+  }
+]

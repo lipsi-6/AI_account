@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-08-19T08:26:48.163669+00:00",
+  "model": "deepseek-chat",
+  "temperature": 0.2,
+  "max_tokens": 48,
+  "system_prompt": null,
+  "use_insight_model": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": "你是一位学术编辑。请基于如下论文上下文与片段内容，生成一个高度概括的中文主题短语（8-16字），不含标点，不要解释：\n论文标题: 测试论文\n研究领域: Artificial Intelligence\n关键贡献: Proposal of HRM, a hierarchical recurrent model for deep reasoning tasks, Demonstration of HRM's ability to solve complex tasks with minimal training data (1000 examples), Elimination of dependency on pre-training or CoT techniques\n片段:\nMIT Press, 2016. http://www. Morgan Kaufmann Publishers Inc. ISBN 1558601600. _ArXiv_, abs/2406. 09308, 2024. 1162/tacl_a_00562. arXiv preprint arXiv:2201. In _ICLR_, 2024. _ArXiv_, abs/2402. 08939, 2024. _arXiv preprint arXiv:2211. 04325_, 2022. _arXiv preprint arXiv:2412. 07423_, 2024. [2024] Evelina Fedorenko, Steven T Piantadosi, and Edward AF Gibson. _Nature_, 630(8017):575-586, 2024. [2024] Hongyu Wang, Shuming Ma, Li Dong, Shaohan Huang, Dongdong Zhang, and Furu Wei. ISSN 0959-4388. doi: https://doi. [2023] Roxana Zeraati, Yan-Liang Shi, Nicholas A Steinmetz, Marc A Gieselmann, Alexander Thiele, Tirin Moore, Anna Levina, and Tatiana A Engel. _Nature communications_, 14(1):1858, 2023. [2024] Klara Kaleb, Barbara Feulner, Juan Gallego, and Claudia Clopath. arXiv preprint arXiv:1911. [2024] Francois Chollet, Mike Knoop, Gregory Kamradt, and Bryan Landers. Arc prize 2024: Technical report. _ArXiv_, abs/2412. 04604, 2024. [2025] Francois Chollet, Mike Knoop, Gregory Kamradt, Bryan Landers, and Henry Pinkard. _arXiv preprint arXiv:2505. 11831_, 2025. Oxford university press, 2006. _Proceedings of the National Academy of Sciences_, 106(49):20942-20947, 2009. _Nature Communications_"
+    }
+  ],
+  "additional_params": {}
+}

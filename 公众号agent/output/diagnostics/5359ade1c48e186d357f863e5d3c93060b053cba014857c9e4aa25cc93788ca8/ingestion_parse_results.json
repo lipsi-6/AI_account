@@ -1,0 +1,20 @@
+[
+  {
+    "parser": "Nougat",
+    "success": true,
+    "quality": "excellent",
+    "content_length": 76885,
+    "sections": 15,
+    "confidence": 1.0,
+    "error": null
+  },
+  {
+    "parser": "PyMuPDF",
+    "success": true,
+    "quality": "excellent",
+    "content_length": 76359,
+    "sections": 14,
+    "confidence": 1.0,
+    "error": null
+  }
+]

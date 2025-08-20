@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-08-19T08:24:36.752871+00:00",
+  "model": "deepseek-chat",
+  "temperature": 0.2,
+  "max_tokens": 48,
+  "system_prompt": null,
+  "use_insight_model": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": "你是一位学术编辑。请基于如下论文上下文与片段内容，生成一个高度概括的中文主题短语（8-16字），不含标点，不要解释：\n论文标题: 测试论文\n研究领域: Artificial Intelligence\n关键贡献: Proposal of HRM, a hierarchical recurrent model for deep reasoning tasks, Demonstration of HRM's ability to solve complex tasks with minimal training data (1000 examples), Elimination of dependency on pre-training or CoT techniques\n片段:\nA halting mechanism (detailed later in this section) determines whether the model should terminate, in which case \\(\\hat{y}\\) will be used as the final prediction, or continue with an additional forward pass. Let \\(M\\) denote the total number of segments executed before termination. A Q-head uses the final state of the H-module to predict the Q-values \\(\\hat{Q}^{m}=(\\hat{Q}^{m}_{\\text{halt}},\\hat{Q}^{m}_{\\text{continue}})\\) of the \"halt\" and \"continue\" actions: \\[\\hat{Q}^{m}=\\sigma(\\theta_{Q}^{\\top}z_{H}^{mNT})\\,,\\] where \\(\\sigma\\) denotes the sigmoid function applied element-wise. The halt or continue action is chosen using a randomized strategy as detailed next. Let \\(M_{\\max}\\) denote the maximum number of segments (a fixed hyperparameter) and \\(M_{\\min}\\) denote the minimum number of segments (a random variable). The value of \\(M_{\\min}\\) is determined stochastically: with probability \\(\\varepsilon\\), it is sampled uniformly from the set \\(\\{2,\\cdots,M_{\\max}\\}\\) (to encourage longer thinking), and with probability \\(1-\\varepsilon\\), it is set to 1. The halt action is selected under two conditions: when the segment count surpasses the maximum threshold \\(M_{\\max}\\), or when th"
+    }
+  ],
+  "additional_params": {}
+}

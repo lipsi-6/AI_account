@@ -1300,7 +1300,38 @@ class IngestionPipeline:
                 
                 file_path, file_hash = await self._download_pdf(url, paper_id, progress_callback)
                 
-                # Stage 2: 解析PDF
+                # 优先尝试基于文件哈希的缓存（命中则跳过后续解析流程）
+                try:
+                    cached = await self._load_cached_processed_paper(file_hash)
+                except Exception as _e:
+                    cached = None
+                    self.logger.warning(f"Failed to load cached ProcessedPaper for {file_hash}: {_e}")
+
+                if cached is not None:
+                    # 使用当前会话的 paper_id 与 url 覆盖基础上下文，避免下游日志错乱
+                    try:
+                        cached.paper_id = paper_id
+                        cached.source_url = url
+                    except Exception:
+                        pass
+
+                    # 清理下载的临时PDF文件
+                    await self._cleanup_temp_file(file_path, paper_id)
+
+                    await self._report_progress(
+                        paper_id, ProcessingStage.COMPLETE, 1.0,
+                        "从缓存加载处理结果", start_time, progress_callback
+                    )
+
+                    logger.info(f"ProcessedPaper loaded from cache: hash={file_hash}")
+                    log_paper_processing(
+                        paper_id, "cache_hit", True,
+                        page_count=cached.metadata.page_count,
+                        quality=(cached.processing_stats or {}).get("final_quality")
+                    )
+                    return cached
+
+                # Stage 2: 解析PDF（未命中缓存）
                 parse_results = await self._parse_pdf(file_path, paper_id, progress_callback)
                 
                 # Stage 3: 提取图像
@@ -1328,6 +1359,12 @@ class IngestionPipeline:
                 processed_paper = await self._build_processed_paper(
                     paper_id, url, file_hash, final_result, parse_results, images
                 )
+
+                # 写入缓存（容错，不影响主流程）
+                try:
+                    await self._save_processed_paper_cache(file_hash, processed_paper)
+                except Exception as _e:
+                    self.logger.warning(f"Failed to save ProcessedPaper cache for {file_hash}: {_e}")
                 
                 # 清理临时文件
                 await self._cleanup_temp_file(file_path, paper_id)
@@ -1591,6 +1628,273 @@ class IngestionPipeline:
             references=references,
             parse_results=all_results,
             processing_stats=processing_stats
+        )
+
+    # -------------------------
+    # 缓存：ProcessedPaper <-> JSON
+    # -------------------------
+    def _get_cache_dir(self) -> Path:
+        """返回缓存目录路径并确保存在。
+
+        目录策略：使用 temp_downloads 的父目录作为根，在其下创建 processed_cache。
+        例如：data/temp_downloads -> data/processed_cache
+        """
+        assert self.config is not None, "Config must be set before caching"
+        temp_root = Path(self.config.paths.temp_downloads_folder).resolve()
+        cache_dir = temp_root.parent / "processed_cache"
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        return cache_dir
+
+    async def _load_cached_processed_paper(self, file_hash: str) -> Optional[ProcessedPaper]:
+        """尝试从缓存中加载 ProcessedPaper。命中返回对象，未命中返回 None。"""
+        cache_dir = self._get_cache_dir()
+        cache_file = cache_dir / f"{file_hash}.json"
+        if not cache_file.exists():
+            return None
+
+        try:
+            async with aiofiles.open(cache_file, 'r', encoding='utf-8') as f:
+                raw = await f.read()
+            data = json.loads(raw)
+            return self._processed_paper_from_dict(data)
+        except Exception as e:
+            self.logger.warning(f"Corrupted cache for {file_hash}: {e}")
+            return None
+
+    async def _save_processed_paper_cache(self, file_hash: str, processed_paper: ProcessedPaper) -> None:
+        """将 ProcessedPaper 持久化为 JSON 缓存（使用文件哈希命名）。"""
+        cache_dir = self._get_cache_dir()
+        cache_file = cache_dir / f"{file_hash}.json"
+        try:
+            payload = self._processed_paper_to_dict(processed_paper)
+            async with aiofiles.open(cache_file, 'w', encoding='utf-8') as f:
+                await f.write(json.dumps(payload, ensure_ascii=False))
+        except Exception as e:
+            # 仅记录，不阻断主流程
+            self.logger.warning(f"Failed to write cache {cache_file}: {e}")
+
+    def _processed_paper_to_dict(self, pp: ProcessedPaper) -> Dict[str, Any]:
+        """序列化 ProcessedPaper 为可 JSON 的 dict。"""
+        def dt(v: Optional[datetime]) -> Optional[str]:
+            try:
+                return v.isoformat() if isinstance(v, datetime) else None
+            except Exception:
+                return None
+
+        def serialize_metadata(md: PaperMetadata) -> Dict[str, Any]:
+            return {
+                'title': md.title,
+                'authors': md.authors,
+                'abstract': md.abstract,
+                'keywords': md.keywords,
+                'doi': md.doi,
+                'arxiv_id': md.arxiv_id,
+                'publication_date': dt(md.publication_date),
+                'journal': md.journal,
+                'conference': md.conference,
+                'pages': md.pages,
+                'volume': md.volume,
+                'issue': md.issue,
+                'url': md.url,
+                'file_hash': md.file_hash,
+                'file_size': md.file_size,
+                'page_count': md.page_count,
+                'language': md.language,
+                'creation_date': dt(md.creation_date),
+                'modification_date': dt(md.modification_date),
+                'producer': md.producer,
+                'creator': md.creator,
+            }
+
+        def serialize_section(s: PaperSection) -> Dict[str, Any]:
+            return {
+                'section_id': s.section_id,
+                'title': s.title,
+                'content': s.content,
+                'level': s.level,
+                'page_numbers': s.page_numbers,
+                'subsections': [serialize_section(ss) for ss in (s.subsections or [])],
+                'references': s.references,
+                'equations': s.equations,
+                'images': s.images,
+                'tables': s.tables,
+            }
+
+        def serialize_image(i: ImageData) -> Dict[str, Any]:
+            return {
+                'image_id': i.image_id,
+                'page_number': i.page_number,
+                'bbox': i.bbox,
+                'image_path': i.image_path,
+                'caption': i.caption,
+                'alt_text': i.alt_text,
+                'figure_number': i.figure_number,
+                'image_type': i.image_type,
+                'width': i.width,
+                'height': i.height,
+                'format': i.format,
+                'file_size': i.file_size,
+            }
+
+        def serialize_table(t: TableData) -> Dict[str, Any]:
+            return {
+                'table_id': t.table_id,
+                'page_number': t.page_number,
+                'bbox': t.bbox,
+                'caption': t.caption,
+                'table_number': t.table_number,
+                'data': t.data,
+                'headers': t.headers,
+                'markdown': t.markdown,
+            }
+
+        def serialize_result(r: ParseResult) -> Dict[str, Any]:
+            return {
+                'parser_name': r.parser_name,
+                'success': r.success,
+                'quality': getattr(r.quality, 'value', str(r.quality)),
+                'content': r.content,
+                'sections': [serialize_section(s) for s in (r.sections or [])],
+                'images': [serialize_image(i) for i in (r.images or [])],
+                'tables': [serialize_table(t) for t in (r.tables or [])],
+                'metadata': serialize_metadata(r.metadata) if r.metadata else None,
+                'processing_time': r.processing_time,
+                'error_message': r.error_message,
+                'confidence_score': r.confidence_score,
+            }
+
+        payload = {
+            'paper_id': pp.paper_id,
+            'source_url': pp.source_url,
+            'metadata': serialize_metadata(pp.metadata),
+            'sections': [serialize_section(s) for s in (pp.sections or [])],
+            'images': [serialize_image(i) for i in (pp.images or [])],
+            'tables': [serialize_table(t) for t in (pp.tables or [])],
+            'full_text': pp.full_text,
+            'abstract': pp.abstract,
+            'references': pp.references,
+            'parse_results': [serialize_result(r) for r in (pp.parse_results or [])],
+            'processing_stats': pp.processing_stats,
+            'created_at': dt(pp.created_at),
+        }
+        return payload
+
+    def _processed_paper_from_dict(self, data: Dict[str, Any]) -> ProcessedPaper:
+        """从 dict 反序列化为 ProcessedPaper（健壮处理）。"""
+        def pdt(s: Optional[str]) -> Optional[datetime]:
+            try:
+                return datetime.fromisoformat(s) if s else None
+            except Exception:
+                return None
+
+        def parse_metadata(d: Optional[Dict[str, Any]]) -> PaperMetadata:
+            d = d or {}
+            return PaperMetadata(
+                title=d.get('title'),
+                authors=d.get('authors') or [],
+                abstract=d.get('abstract'),
+                keywords=d.get('keywords') or [],
+                doi=d.get('doi'),
+                arxiv_id=d.get('arxiv_id'),
+                publication_date=pdt(d.get('publication_date')),
+                journal=d.get('journal'),
+                conference=d.get('conference'),
+                pages=d.get('pages'),
+                volume=d.get('volume'),
+                issue=d.get('issue'),
+                url=d.get('url'),
+                file_hash=d.get('file_hash'),
+                file_size=int(d.get('file_size') or 0),
+                page_count=int(d.get('page_count') or 0),
+                language=d.get('language') or 'en',
+                creation_date=pdt(d.get('creation_date')),
+                modification_date=pdt(d.get('modification_date')),
+                producer=d.get('producer'),
+                creator=d.get('creator'),
+            )
+
+        def parse_section(d: Dict[str, Any]) -> PaperSection:
+            return PaperSection(
+                section_id=d.get('section_id') or '',
+                title=d.get('title') or '',
+                content=d.get('content') or '',
+                level=int(d.get('level') or 1),
+                page_numbers=d.get('page_numbers') or [],
+                subsections=[parse_section(sd) for sd in (d.get('subsections') or [])],
+                references=d.get('references') or [],
+                equations=d.get('equations') or [],
+                images=d.get('images') or [],
+                tables=d.get('tables') or [],
+            )
+
+        def parse_image(d: Dict[str, Any]) -> ImageData:
+            return ImageData(
+                image_id=d.get('image_id') or '',
+                page_number=int(d.get('page_number') or 0),
+                bbox=tuple(d.get('bbox') or (0.0, 0.0, 0.0, 0.0)),
+                image_path=d.get('image_path') or '',
+                caption=d.get('caption'),
+                alt_text=d.get('alt_text'),
+                figure_number=d.get('figure_number'),
+                image_type=d.get('image_type') or 'figure',
+                width=int(d.get('width') or 0),
+                height=int(d.get('height') or 0),
+                format=d.get('format') or 'PNG',
+                file_size=int(d.get('file_size') or 0),
+            )
+
+        def parse_table(d: Dict[str, Any]) -> TableData:
+            return TableData(
+                table_id=d.get('table_id') or '',
+                page_number=int(d.get('page_number') or 0),
+                bbox=tuple(d.get('bbox') or (0.0, 0.0, 0.0, 0.0)),
+                caption=d.get('caption'),
+                table_number=d.get('table_number'),
+                data=d.get('data') or [],
+                headers=d.get('headers') or [],
+                markdown=d.get('markdown'),
+            )
+
+        def parse_result(d: Dict[str, Any]) -> ParseResult:
+            quality_raw = d.get('quality')
+            try:
+                quality = ParseQuality(quality_raw) if isinstance(quality_raw, str) else ParseQuality.FAILED
+            except Exception:
+                quality = ParseQuality.FAILED
+            return ParseResult(
+                parser_name=d.get('parser_name') or '',
+                success=bool(d.get('success')),
+                quality=quality,
+                content=d.get('content') or '',
+                sections=[parse_section(s) for s in (d.get('sections') or [])],
+                images=[parse_image(i) for i in (d.get('images') or [])],
+                tables=[parse_table(t) for t in (d.get('tables') or [])],
+                metadata=parse_metadata(d.get('metadata')) if d.get('metadata') else None,
+                processing_time=float(d.get('processing_time') or 0.0),
+                error_message=d.get('error_message'),
+                confidence_score=float(d.get('confidence_score') or 0.0),
+            )
+
+        md = parse_metadata(data.get('metadata') or {})
+        sections = [parse_section(s) for s in (data.get('sections') or [])]
+        images = [parse_image(i) for i in (data.get('images') or [])]
+        tables = [parse_table(t) for t in (data.get('tables') or [])]
+        parse_results = [parse_result(r) for r in (data.get('parse_results') or [])]
+        created_at = pdt(data.get('created_at')) or datetime.now()
+
+        return ProcessedPaper(
+            paper_id=data.get('paper_id') or '',
+            source_url=data.get('source_url') or '',
+            metadata=md,
+            sections=sections,
+            images=images,
+            tables=tables,
+            full_text=data.get('full_text') or '',
+            abstract=data.get('abstract') or '',
+            references=data.get('references') or [],
+            parse_results=parse_results,
+            processing_stats=data.get('processing_stats') or {},
+            created_at=created_at,
         )
     
     def _extract_abstract(self, content: str) -> str:

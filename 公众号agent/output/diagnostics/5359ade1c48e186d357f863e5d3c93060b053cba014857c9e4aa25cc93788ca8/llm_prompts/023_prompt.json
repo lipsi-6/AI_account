@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-08-19T08:25:36.489459+00:00",
+  "model": "deepseek-chat",
+  "temperature": 0.2,
+  "max_tokens": 48,
+  "system_prompt": null,
+  "use_insight_model": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": "你是一位学术编辑。请基于如下论文上下文与片段内容，生成一个高度概括的中文主题短语（8-16字），不含标点，不要解释：\n论文标题: 测试论文\n研究领域: Artificial Intelligence\n关键贡献: Proposal of HRM, a hierarchical recurrent model for deep reasoning tasks, Demonstration of HRM's ability to solve complex tasks with minimal training data (1000 examples), Elimination of dependency on pre-training or CoT techniques\n片段:\n## 4 Brain Correspondence A key principle from systems neuroscience is that a brain region's functional repertoire--its ability to handle diverse and complex tasks--is closely linked to the dimensionality of its neural representations [75, 76]. Higher-order cortical areas, responsible for complex reasoning and decision-making, must handle a wide variety of tasks, demanding more flexible and context-dependent processing [77]. In dynamical systems, this flexibility is often realized through higher-dimensional state-space trajectories, which allow for a richer repertoire of potential computations [78]. This principle gives rise to an observable _dimensionality hierarchy_, where a region's position in the processing hierarchy correlates with its _effective dimensionality_. To quantify this phenomenon, we can examine the Figure 7: **Visualization of intermediate predictions by HRM on benchmark tasks. ****Top:**_MazeHard_—blue cells indicate the predicted path. **Middle:**_Sudoku-Extreme_—bold cells represent initial givens; red highlights cells violating Sudoku constraints; Figure 8: **Hierarchical Dimensionality Organization in the HRM and Mouse Cortex. ****(a,b)** are adapted from Pos"
+    }
+  ],
+  "additional_params": {}
+}

@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-08-19T08:26:51.693659+00:00",
+  "model": "deepseek-chat",
+  "temperature": 0.2,
+  "max_tokens": 48,
+  "system_prompt": null,
+  "use_insight_model": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": "你是一位学术编辑。请基于如下论文上下文与片段内容，生成一个高度概括的中文主题短语（8-16字），不含标点，不要解释：\n论文标题: 测试论文\n研究领域: Artificial Intelligence\n关键贡献: Proposal of HRM, a hierarchical recurrent model for deep reasoning tasks, Demonstration of HRM's ability to solve complex tasks with minimal training data (1000 examples), Elimination of dependency on pre-training or CoT techniques\n片段:\nAverage-hard attention transformers are constant-depth uniform threshold circuits, 2023. A logic for expressing log-precision transformers. Transformers in DLOGTIME-uniform TC\\({}^{0}\\). Transformers meet neural algorithmic reasoners. The parallelism tradeoff: Limitations of log-precision transformers. The expressive power of transformers with chain of thought. Roformer: Enhanced transformer with rotary position embedding. Glu variants improve transformer. Universal transformers, 2018. Transformers are ssms: Generalized models and efficient algorithms through structured state space duality."
+    }
+  ],
+  "additional_params": {}
+}
