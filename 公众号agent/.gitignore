@@ -5,10 +5,14 @@ __pycache__/
 *.pyd
 
 # 日志文件
-logs/
+logs/*
+!logs/.gitkeep
 
 # ChromaDB 向量数据库文件 (通常不应纳入版本控制)
 data/memory/chroma_db/
+
+# 论文处理缓存
+data/processed_cache/
 
 # 临时下载文件
 data/temp_downloads/
@@ -18,3 +22,6 @@ data/temp_downloads/
 
 # 测试用的 PDF 文件 (除非它是专案的固定资产)
 # test.pdf
+
+output/*
+!output/.gitkeep

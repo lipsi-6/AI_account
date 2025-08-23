@@ -32,7 +32,7 @@ async def test_pdf_processing():
     print("🧪 开始测试PDF处理功能...")
     
     # 检查测试PDF是否存在
-    pdf_path = Path("test.pdf")
+    pdf_path = Path("test_simple.pdf")
     if not pdf_path.exists():
         print("❌ 测试PDF文件不存在！")
         return False
