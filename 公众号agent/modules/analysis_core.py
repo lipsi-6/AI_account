@@ -170,14 +170,51 @@ class PromptTemplateManager:
             trim_blocks=True,
             lstrip_blocks=True
         )
-        # 确保 tojson 过滤器存在，避免模板中使用 tojson 时环境缺失导致渲染失败
-        if 'tojson' not in self.env.filters:
-            try:
-                import json as _json
-                self.env.filters['tojson'] = lambda v: _json.dumps(v, ensure_ascii=False)
-            except Exception:
-                # 保底：转换为字符串
-                self.env.filters['tojson'] = lambda v: str(v)
+        # 无条件覆盖 tojson 过滤器，支持 datetime/Path/set 等对象的安全序列化
+        try:
+            import json as _json
+
+            def _safe_tojson(value):
+                def _default(o):
+                    try:
+                        # datetime/date → ISO 字符串
+                        from datetime import datetime as _dt_datetime, date as _dt_date
+                        if isinstance(o, (_dt_datetime, _dt_date)):
+                            return o.isoformat()
+                    except Exception:
+                        pass
+                    try:
+                        # Path → 字符串
+                        from pathlib import Path as _Path
+                        if isinstance(o, _Path):
+                            return str(o)
+                    except Exception:
+                        pass
+                    try:
+                        # set → list
+                        if isinstance(o, set):
+                            return list(o)
+                    except Exception:
+                        pass
+                    # 兜底：转字符串
+                    try:
+                        return str(o)
+                    except Exception:
+                        return None
+
+                try:
+                    return _json.dumps(value, ensure_ascii=False, default=_default)
+                except Exception:
+                    # 最兜底：直接字符串化
+                    try:
+                        return str(value)
+                    except Exception:
+                        return "null"
+
+            self.env.filters['tojson'] = _safe_tojson
+        except Exception:
+            # 保底：转换为字符串
+            self.env.filters['tojson'] = lambda v: str(v)
         self.logger = get_logger("prompt_template_manager")
 
     async def initialize(self) -> None:
@@ -405,7 +442,7 @@ class SemanticChunker:
         content: str,
         global_map: GlobalAnalysisMap,
         strategy: ChunkingStrategy = ChunkingStrategy.HIERARCHICAL_HYBRID,
-        target_chunk_size: int = 500,
+        target_chunk_size: int = 5000,
         similarity_threshold: float = 0.75
     ) -> List[SemanticChunk]:
         """
@@ -489,6 +526,8 @@ class SemanticChunker:
         chunks = []
         
         # 定义章节模式
+        """
+        原模式
         section_patterns = [
             (r'\n\s*#+\s*(.+)', 'heading'),
             (r'\n\s*Abstract\s*\n', 'abstract'),
@@ -501,6 +540,21 @@ class SemanticChunker:
             (r'\n\s*Discussion\s*\n', 'discussion'),
             (r'\n\s*Conclusion\s*\n', 'conclusion'),
             (r'\n\s*References?\s*\n', 'references'),
+        ]
+        """
+
+        section_patterns = [
+            (r'\n\s*#+\s*(.+)', 'heading'),
+            (r'\n\s*#+.*Abstract.*\n', 'abstract'),
+            (r'\n\s*#+.*Introduction.*\n', 'introduction'),
+            (r'\n\s*#+.*Related Work.*\n', 'related_work'),
+            (r'\n\s*#+.*Methodology.*\n', 'methodology'),
+            (r'\n\s*#+.*Method.*\n', 'method'),
+            (r'\n\s*#+.*Experiments?.*\n', 'experiments'),
+            (r'\n\s*#+.*Results?.*\n', 'results'),
+            (r'\n\s*#+.*Discussion.*\n', 'discussion'),
+            (r'\n\s*#+.*Conclusion.*\n', 'conclusion'),
+            (r'\n\s*#+.*References?.*\n', 'references'),
         ]
         
         # 查找章节边界

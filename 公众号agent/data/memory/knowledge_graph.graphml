@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d7" for="node" attr.name="paper_id" attr.type="string" />
+  <key id="d6" for="node" attr.name="paper_title" attr.type="string" />
+  <key id="d5" for="node" attr.name="domain" attr.type="string" />
+  <key id="d4" for="node" attr.name="updated_at" attr.type="string" />
+  <key id="d3" for="node" attr.name="created_at" attr.type="string" />
+  <key id="d2" for="node" attr.name="importance_score" attr.type="double" />
+  <key id="d1" for="node" attr.name="name" attr.type="string" />
+  <key id="d0" for="node" attr.name="node_type" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="fcea1a96-5ff9-4c92-ac4b-9c24026c99c4">
+      <data key="d0">concept</data>
+      <data key="d1">Parasocial Relationships</data>
+      <data key="d2">1.0</data>
+      <data key="d3">2025-08-25T04:18:35.597422+00:00</data>
+      <data key="d4">None</data>
+      <data key="d5">AI Safety and Alignment</data>
+      <data key="d6">测试论文</data>
+      <data key="d7">d07fd4a9-1107-4ec9-ae59-ff689aadee97</data>
+    </node>
+    <node id="c0f5cad2-ef67-4866-abdc-2ec573aa64b6">
+      <data key="d0">concept</data>
+      <data key="d1">AI Safety</data>
+      <data key="d2">1.0</data>
+      <data key="d3">2025-08-25T04:18:35.625760+00:00</data>
+      <data key="d4">None</data>
+      <data key="d5">AI Safety and Alignment</data>
+      <data key="d6">测试论文</data>
+      <data key="d7">d07fd4a9-1107-4ec9-ae59-ff689aadee97</data>
+    </node>
+    <node id="a09e6235-71ae-44d6-9870-3b31bff2d391">
+      <data key="d0">concept</data>
+      <data key="d1">Alignment</data>
+      <data key="d2">1.0</data>
+      <data key="d3">2025-08-25T04:18:35.650569+00:00</data>
+      <data key="d4">None</data>
+      <data key="d5">AI Safety and Alignment</data>
+      <data key="d6">测试论文</data>
+      <data key="d7">d07fd4a9-1107-4ec9-ae59-ff689aadee97</data>
+    </node>
+    <node id="ba657dfe-8b15-4b9a-a40c-c036de226c39">
+      <data key="d0">concept</data>
+      <data key="d1">Evaluation Agents</data>
+      <data key="d2">1.0</data>
+      <data key="d3">2025-08-25T04:18:35.679326+00:00</data>
+      <data key="d4">None</data>
+      <data key="d5">AI Safety and Alignment</data>
+      <data key="d6">测试论文</data>
+      <data key="d7">d07fd4a9-1107-4ec9-ae59-ff689aadee97</data>
+    </node>
+    <node id="41df889f-ce68-4a6d-aca8-fff8dddcab5d">
+      <data key="d0">concept</data>
+      <data key="d1">Sycophancy</data>
+      <data key="d2">1.0</data>
+      <data key="d3">2025-08-25T04:18:35.705612+00:00</data>
+      <data key="d4">None</data>
+      <data key="d5">AI Safety and Alignment</data>
+      <data key="d6">测试论文</data>
+      <data key="d7">d07fd4a9-1107-4ec9-ae59-ff689aadee97</data>
+    </node>
+  </graph>
+</graphml>

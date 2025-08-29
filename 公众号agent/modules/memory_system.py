@@ -245,8 +245,8 @@ class ChromaDBEpisodicBackend(BaseMemoryBackend):
             try:
                 self.collection = self.client.get_collection(name=collection_name)
                 self.logger.info(f"Connected to existing ChromaDB collection: {collection_name}")
-            except ValueError:
-                # 集合不存在，创建新集合
+            except Exception:
+                # 集合不存在或已被清理：尝试创建
                 try:
                     self.collection = self.client.create_collection(
                         name=collection_name,
@@ -261,6 +261,17 @@ class ChromaDBEpisodicBackend(BaseMemoryBackend):
                         name=collection_name,
                         metadata={"description": "Deep Scholar AI Episodic Memory"}
                     )
+                except Exception:
+                    # 极端情况下（底层索引缺失等），执行 reset 后重建
+                    try:
+                        if hasattr(self.client, "reset"):
+                            self.client.reset()
+                        self.collection = self.client.create_collection(
+                            name=collection_name,
+                            metadata={"description": "Deep Scholar AI Episodic Memory"}
+                        )
+                    except Exception as _e:
+                        raise MemoryInitializationError(f"Failed to (re)create ChromaDB collection: {_e}")
                 self.logger.info(f"Created new ChromaDB collection: {collection_name}")
             
             self._initialized = True
