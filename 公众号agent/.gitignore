@@ -18,7 +18,7 @@ data/processed_cache/
 data/temp_downloads/
 
 # 本地环境配置文件 (保护敏感信息)
-.env
+.venv
 
 # 测试用的 PDF 文件 (除非它是专案的固定资产)
 # test.pdf
