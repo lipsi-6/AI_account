@@ -1,5 +1,10 @@
 # Deep Scholar AI - 依赖包列表
 
+# 如何安装
+# $env:PYTHONUTF8=1
+# python -X utf8 -m pip install -r requirements.txt
+
+
 # 核心依赖
 asyncio-throttle==1.0.2
 aiofiles==23.2.1

@@ -22,7 +22,7 @@ from abc import ABC, abstractmethod
 from enum import Enum
 import json
 import re
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urlparse, urljoin, unquote
 from datetime import datetime
 
 # PDF处理库
@@ -256,13 +256,23 @@ class NougatParser(PDFParser):
             # 使用预训练模型或指定路径
             model_name = self.model_path or "facebook/nougat-base"
             
-            # 在后台线程中加载模型以避免阻塞
-            self.processor = await asyncio.to_thread(
-                NougatProcessor.from_pretrained, model_name
-            )
-            self.model = await asyncio.to_thread(
-                VisionEncoderDecoderModel.from_pretrained, model_name
-            )
+            # 离线优先加载（避免触发网络请求），失败后再回退在线加载
+            try:
+                self.processor = await asyncio.to_thread(
+                    NougatProcessor.from_pretrained, model_name, local_files_only=True
+                )
+                self.model = await asyncio.to_thread(
+                    VisionEncoderDecoderModel.from_pretrained, model_name, local_files_only=True
+                )
+                self.logger.info("Loaded Nougat locally (local_files_only=True)")
+            except Exception as offline_err:
+                self.logger.warning(f"Offline Nougat load failed, falling back to online: {offline_err}")
+                self.processor = await asyncio.to_thread(
+                    NougatProcessor.from_pretrained, model_name
+                )
+                self.model = await asyncio.to_thread(
+                    VisionEncoderDecoderModel.from_pretrained, model_name
+                )
             
             # 移动到指定设备
             if self.device != "cpu":
@@ -1062,15 +1072,28 @@ class PDFDownloader:
 
             parsed = urlparse(url)
 
-            # 分支1：本地文件（file:// 或 直接路径）
-            if parsed.scheme in ('', 'file'):
+            # 分支1：本地文件（Windows 盘符/UNC、file://、或直接路径）
+            is_windows_drive_path = bool(re.match(r'^[A-Za-z]:[\\/]', url))
+            is_unc_path = url.startswith('\\\\') or url.startswith('//')
+            is_plain_local = parsed.scheme == '' and not parsed.netloc
+            is_file_scheme = parsed.scheme == 'file'
+
+            if is_windows_drive_path or is_unc_path or is_plain_local or is_file_scheme:
                 # 解析本地路径
                 local_path = None
-                if parsed.scheme == 'file':
-                    # 处理 file:// URI
-                    local_path = Path(parsed.path)
+                if is_file_scheme:
+                    # 处理 file:// URI（包含可能的盘符 netloc）
+                    if parsed.netloc and re.match(r'^[A-Za-z]:$', parsed.netloc):
+                        combined = f"{parsed.netloc}{parsed.path}"
+                    else:
+                        combined = parsed.path
+                    # 去掉形如 /D:/ 前导斜杠并反解码
+                    combined = unquote(combined)
+                    if re.match(r'^/[A-Za-z]:', combined):
+                        combined = combined.lstrip('/')
+                    local_path = Path(combined)
                 else:
-                    # 处理直接传入的本地路径（相对或绝对）
+                    # 处理直接传入的本地路径（相对或绝对，或 UNC）
                     local_path = Path(url)
 
                 if not local_path.is_absolute():
